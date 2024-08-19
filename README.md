@@ -23,5 +23,5 @@
 - 🎨 Beautiful UI using **TailwindCSS** and **ShadcnUI**
 - 🔁 WebSocket fallback with **Polling** and alerts
 - 🗄️ ORM using **Prisma**
-- 🗃️ MySQL database using **Drizzle**
+- 🗃️ MySQL database using **NeonDB**
 - 🔑 Authentication with **Clerk**
