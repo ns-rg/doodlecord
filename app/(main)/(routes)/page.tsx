@@ -28,9 +28,11 @@ export default function Home() {
         <div className="flex flex-col items-center gap-10">
           <p className="text-7xl font-extrabold">Join the playground 🛝</p>
           <div className="flex flex-row gap-5 justify-center">
-            <Button className="w-96 h-12 py-4  text-xl font-bold">
-              Spin up a server
-            </Button>
+            <Link href="/setup">
+              <Button className="w-96 h-12 py-4  text-xl font-bold">
+                Spin up a server
+              </Button>
+            </Link>
             <Button className="w-96 h-12 py-4  text-xl font-bold">
               Begin Doodling
             </Button>
