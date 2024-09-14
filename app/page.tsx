@@ -6,8 +6,8 @@ import { Github } from "@/app/icons";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-white dark:bg-[#0b090a] text-gray-900 dark:text-white">
-      <header className="sticky top-0 z-40 bg-white dark:bg-[#0b090a]">
+    <div className="flex min-h-screen flex-col bg-white dark:bg-[#1e1f22] text-gray-900 dark:text-white">
+      <header className="sticky top-0 z-40 bg-white dark:bg-[#1e1f22]">
         <div className="flex items-center justify-between py-4 sm:px-6 lg:px-6 px-5">
           <Link
             href="#"
@@ -39,7 +39,7 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <footer className="dark:bg-[#0b090a] py-4 ">
+      <footer className="dark:bg-[#1e1f22] py-4 ">
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
             <p className="text-md font-bold text-gray-800 dark:text-white">
