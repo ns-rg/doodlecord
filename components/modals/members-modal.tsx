@@ -1,5 +1,12 @@
 "use client";
 
+import { Check, Gavel, Loader2, MoreVertical, Shield, ShieldAlert, ShieldCheck, ShieldQuestion } from "lucide-react";
+import { useState } from "react";
+import { MemberRole } from "@prisma/client";
+import qs from "query-string";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+
 import {
   Dialog,
   DialogContent,
@@ -12,8 +19,19 @@ import { useModal } from "@/hooks/use-model-store";
 import { ServerWithMembersWithProfile } from "@/types";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { UserAvatar } from "@/components/user-avatar";
-import { ShieldAlert, ShieldCheck } from "lucide-react";
-import { useState } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuTrigger,
+  DropdownMenuSubTrigger,
+
+} from "@/components/ui/dropdown-menu";
+import { Member } from "@prisma/client";
 
 
 const roleIconMap = {
@@ -23,15 +41,71 @@ const roleIconMap = {
 };
 
 export const MembersModal = () => {
+  const router = useRouter();
   const { onOpen, isOpen, onClose, type, data } = useModal();
-  //const [loadingId, setLoadingId] = useState("");
+  const [loadingId, setLoadingId] = useState("");
 
   const isModalOpen = isOpen && type === "members";
   const { server } = data as { server: ServerWithMembersWithProfile };
 
+
+  const onKick = async (memberId: string) => {
+    
+    try{
+      setLoadingId(memberId);
+      
+      const url = qs.stringifyUrl({
+        url: `/api/members/${memberId}`,
+        query: {
+          serverId: server?.id,
+        }
+      })
+
+      const response = await axios.delete(url);
+      router.refresh();
+      onOpen("members", { server: response.data });
+    }
+    catch(error){
+      console.error(error);
+    }
+    finally{
+      setLoadingId("");
+    }
+
+  }
+
+
+  const onRoleChange = async (memberId : string, role: MemberRole) => {
+
+    try{
+      setLoadingId(memberId);
+      
+      const url = qs.stringifyUrl({
+        url: `/api/members/${memberId}`,
+        query: {
+          serverId: server?.id,
+        }
+      })
+
+      const response = await axios.patch(url, { role });
+
+      router.refresh();
+      onOpen("members", { server: response.data });
+    }
+    catch(error){
+      console.error(error);
+    }
+    finally{
+      setLoadingId("");
+    }
+
+  }
+
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent className="bg-white text-black overflow-hidden">
+
+        {/* Header Section which contains Heading and number of members logic */}
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
             Manage Members
@@ -40,6 +114,8 @@ export const MembersModal = () => {
             {server?.members?.length} Members
           </DialogDescription>
         </DialogHeader>
+
+        {/* scroll area code .... */}
         <ScrollArea className="mt-8 max-h-[420px] pr-6">
           {server?.members?.map((member) => (
             <div key={member.id} className="flex items-center gap-x-2 mb-6">
@@ -53,11 +129,63 @@ export const MembersModal = () => {
                   {member.profile.email}
                 </p>
               </div>
-              {/* {server.profileId !== member.profileId && loadingId !== member.id && (
+              {server.profileId !== member.profileId && loadingId !== member.id && (
                 <div className="ml-auto">
-                  Actions!
+                  <DropdownMenu>
+                    <DropdownMenuTrigger>
+                      <MoreVertical className="h-4 w-4 text-zinc-500" />
+                    </DropdownMenuTrigger>
+
+                    <DropdownMenuContent side="left">
+                      <DropdownMenuSub>
+                        <DropdownMenuSubTrigger className="flex items-center">
+                          <ShieldQuestion className="w-4 h-4 mr-4" />
+                          <span>Role</span>
+                        </DropdownMenuSubTrigger>
+                        <DropdownMenuPortal>
+                          <DropdownMenuSubContent>
+                            <DropdownMenuItem
+                              onClick={() => onRoleChange(member.id, "GUEST")}
+                            >
+                              <Shield className="w-4 h-4 mr-4" />
+                              Guest
+                              {
+                                member.role === "GUEST" && (
+                                <Check className="w-4 h-4 ml-auto text-green-500" />
+                              )}
+                            </DropdownMenuItem>
+
+                            <DropdownMenuItem
+                              onClick={() => onRoleChange(member.id, "MODERATOR")}
+                            >
+                              <Shield className="w-4 h-4 mr-4" />
+                              Moderator
+                              {
+                                member.role === "MODERATOR" && (
+                                <Check className="w-4 h-4 ml-auto text-green-500" />
+                              )}
+                            </DropdownMenuItem>
+                          </DropdownMenuSubContent>
+                        </DropdownMenuPortal>
+                      </DropdownMenuSub>
+                    
+                      <DropdownMenuSeparator/>
+                      <DropdownMenuItem
+                        onClick={() => onKick(member.id)}
+                      >
+                        <Gavel className="w-4 h-4 mr-4" />
+                        Kick
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                      
+                  </DropdownMenu>
                 </div>
-              )} */}
+              )}
+              {
+                loadingId === member.id && (
+                  <Loader2 className="animate-spin text-zinc-500 h-4 w-4 ml-auto" />
+                )
+              }
             </div>
           ))}
         </ScrollArea>
