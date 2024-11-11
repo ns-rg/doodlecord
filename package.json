@@ -27,6 +27,8 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.2",
     "@tanstack/react-query": "^5.59.15",
+    "@tldraw/sync": "^3.4.1",
+    "@tldraw/tldraw": "^3.4.1",
     "@uploadthing/react": "^6.8.0",
     "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",

@@ -33,9 +33,11 @@ export default function Home() {
                 Spin up a server
               </Button>
             </Link>
-            <Button className="w-96 h-12 py-4  text-xl font-bold">
-              Begin Doodling
-            </Button>
+            <Link href="/whiteboard">
+              <Button className="w-96 h-12 py-4  text-xl font-bold">
+                Begin Doodling
+              </Button>
+            </Link>
           </div>
         </div>
       </main>
