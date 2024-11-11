@@ -7,9 +7,6 @@ import { UserButton } from "@clerk/nextjs";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ModeToggle } from "@/components/mode-toggle";
-import { Pencil } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
 export const NavigationSidebar = async () => {
   const profile = await currentProfile();
@@ -43,11 +40,6 @@ export const NavigationSidebar = async () => {
         ))}
       </ScrollArea>
       <div className="pb-3 mt-auto flex items-center flex-col gap-y-4">
-        <Link href="/whiteboard">
-          <Button variant="ghost" size="icon" className="hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50">
-            <Pencil className="h-[1.2rem] w-[1.2rem]" />
-          </Button>
-        </Link>
         <ModeToggle />
         <UserButton
           afterSignOutUrl="/"
