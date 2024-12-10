@@ -25,3 +25,29 @@
 - 🗄️ ORM using **Prisma**
 - 🗃️ MySQL database using **NeonDB**
 - 🔑 Authentication with **Clerk**
+- ✏️ TLDraw For **whiteboard**
+
+## 🛠 Steps to Build the project
+
+- Clone the repository using git clone command or directly download the zip file from github.
+- Install dependencies by running the following command : <code>npm i</code>
+- Add your own secret keys for the project by creating env file.
+- After installing all the dependencies, run the project by using following command : <code>npm run dev</code>
+
+## 🛠 Env file contents: 
+
+- NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=<!yourSecretKey>
+- CLERK_SECRET_KEY=<!yourSecretKey>
+- NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+- NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+- NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
+- NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
+
+- DATABASE_URL="<!yourSecretKey>"
+  
+- UPLOADTHING_SECRET='<!yourSecretKey>'
+- UPLOADTHING_APP_ID='<!yourSecretKey>'
+  
+- LIVEKIT_API_KEY  = <!yourSecretKey>
+- LIVEKIT_API_SECRET  = <!yourSecretKey>
+- NEXT_PUBLIC_LIVEKIT_URL  = <!yourSecretKey>
