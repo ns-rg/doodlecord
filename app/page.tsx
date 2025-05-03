@@ -48,7 +48,7 @@ export default function Home() {
               &copy; 2024 DoodleCord. All rights reserved.
             </p>
             <Link
-              href="https://github.com/NisargPatel14/doodlecord"
+              href="https://github.com/ns-rg/doodlecord"
               className="flex items-center gap-2 text-lg font-semibold"
             >
               <Github />
