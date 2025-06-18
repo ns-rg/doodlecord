@@ -2,6 +2,14 @@
 
 # A seamless communication platform. Collaborative, secure, and connected across all channels.
 
+## 🚀 Sceenshots
+
+![LightHome](https://github.com/ns-rg/doodlecord/blob/master/public/MainScreen-Light.png)
+
+![ChatAndVc](https://github.com/ns-rg/doodlecord/blob/master/public/ChatAndVc.jpg)
+
+![Doodle Cord](https://github.com/ns-rg/doodlecord/blob/master/public/Whiteboard-Collaboration.png)
+
 ## 🚀 Features
 
 - 💬 Real-time messaging using **Socket.io**
